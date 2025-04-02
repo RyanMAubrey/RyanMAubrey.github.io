@@ -49,7 +49,7 @@ AI chatbots using GPT-based models and speech-to-text technology enhance voice i
 Unlike existing assistants that rely on predefined commands, M.A.V.I.S combines existing tools to create a more dynamic and context-aware system. By focusing on engagement, personalization, and ethical considerations it aims to make AI interactions more natural and enjoyable.
 
 ## Methods
-Our project is developed entirely in Python, which serves as the coding language which we wil integrate various open-source tools and libraries. We will begin by using VOSK for speech recognition, which efficiently converts spoken input into text, forming the initial output of our data processing pipeline with a text file (https://alphacephei.com/vosk/). This transcribed text is then fed into our AI assistant built on the RASA open-source framework, where natural language understanding and conversational response generation take place utilizing a deep neural network (https://rasa.com/docs/rasa/). The system further processes these responses by converting the output text back into speech using Mozilla Common Voice TTS to create an audio file (https://commonvoice.mozilla.org/en). Finally, when displayed back through the phone application, the UI will use a waveform generator to create a unique visual (https://github.com/larryleeyu/AudioViz). Our data pipeline also leverages publicly available data sets to train these tools. Mozilla Common Voice TTS is trained with a consistent voice modeled off the LJ Speech dataset (https://keithito.com/LJ-Speech-Dataset/), while VOSK benefits from pre-trained models that require no additional fine-tuning. For the RASA framework, we incorporate a dual-dataset approach using RASA’s sample dataset (https://github.com/RasaHQ/rasa/blob/main/examples/formbot/data/nlu.yml) for intent recognition and the MultiWOZ dataset (https://github.com/budzianowski/multiwoz) for generating realistic dialogue responses on existing examples. Potential pitfalls include challenges such as ambient noise affecting VOSK's accuracy in transcribing user input, latency in processing real-time interactions, and ensuring robust data security and privacy measures throughout the system.
+Our project is developed entirely in Python, which serves as the coding language which we wil integrate various open-source tools and libraries. We will begin by using VOSK for speech recognition, which efficiently converts spoken input into text, forming the initial output of our data processing pipeline with a text file[^8]. This transcribed text is then fed into our AI assistant built on the RASA open-source framework, where natural language understanding and conversational response generation take place utilizing a deep neural network[^9]. The system further processes these responses by converting the output text back into speech using Mozilla Common Voice TTS to create an audio file[^10]. Finally, when displayed back through the phone application, the UI will use a waveform generator to create a unique visual[^11]. Our data pipeline also leverages publicly available data sets to train these tools. Mozilla Common Voice TTS is trained with a consistent voice modeled off the LJ Speech dataset[^12], while VOSK benefits from pre-trained models that require no additional fine-tuning. For the RASA framework, we incorporate a dual-dataset approach using RASA’s sample dataset[^13] for intent recognition and the MultiWOZ dataset[^14] for generating realistic dialogue responses on existing examples. Potential pitfalls include challenges such as ambient noise affecting VOSK's accuracy in transcribing user input, latency in processing real-time interactions, and ensuring robust data security and privacy measures throughout the system.
 
 ### Speech Recognition and NLP
 The Large Language and Speech Model (LLaSM) presented by Shu et al. [2] posits that speech is context-rich and underscores the need for a versatile AI technology that integrates speech and language prompts. It describes the methodology behind LLaSM and its dataset addressing the shortage of open-source speech–text cross-modal instruction-following data. Although tangential to our project, we may diverge in execution by implementing a futuristic user interface or giving our model a specific persona [2]. “My-Assistant,” developed by Gupta et al. [6] focuses on speech recognition and natural language understanding techniques. It details methods for pre-processing, speech signal processing, intent identification, and response generation, discussing system integrations and performance metrics that emphasize enhancing recognition accuracy and intent identification.
@@ -75,6 +75,34 @@ How might we impinge individuals' privacy and/or anonymity? Handling the voice-t
 What is the environmental impact of training and running M.A.V.I.S? All AI models require tons of computational power, which in turn has an energy cost. We will consider optimizing efficiency and minimizing energy use where possible.
 
 ## References
+
+[^1]: The Ethics of Advanced AI Assistants. https://arxiv.org/abs/2404.16244 ↩
+
+[^2]: LLASM: Large Language and Speech Model. https://arxiv.org/pdf/2308.15930 ↩
+
+[^3]: Understanding Older People’s Voice Interactions with Smart Voice Assistants: A New Modified Rule-Based Natural Language Processing Model with Human Input. https://pmc.ncbi.nlm.nih.gov/articles/PMC11135128/ ↩
+
+[^4]: Natural Language Processing: An Introduction. https://www.researchgate.net/publication/51576224_Natural_language_processing_An_introduction ↩
+
+[^5]: Real-Time Speech Emotion Analysis for Smart Home Assistants. https://ieeexplore.ieee.org/abstract/document/9352018 ↩
+
+[^6]: My Assistant SRSTC: Speech Recognition and Speech to Text Conversion. https://ieeexplore.ieee.org/abstract/document/10593324 ↩
+
+[^7]: Artificial Intelligence-Based Chatbot with Voice Assistance. https://ieeexplore.ieee.org/abstract/document/10545197 ↩
+
+[^8]: VOSK Speech Recognition. https://alphacephei.com/vosk/ ↩
+
+[^9]: RASA Documentation. https://rasa.com/docs/rasa/ ↩
+
+[^10]: Mozilla Common Voice. https://commonvoice.mozilla.org/en ↩
+
+[^11]: AudioViz by larryleeyu. https://github.com/larryleeyu/AudioViz ↩
+
+[^12]: LJ Speech Dataset. https://keithito.com/LJ-Speech-Dataset/ ↩
+
+[^13]: RASA Formbot Example Data. https://github.com/RasaHQ/rasa/blob/main/examples/formbot/data/nlu.yml ↩
+
+[^14]: MultiWOZ Dataset. https://github.com/budzianowski/multiwoz ↩
 
 1. Gabriel, I., Manzini, A., Keeling, G., Hendricks, L. A., Rieser, V., Iqbal, H., ... & Manyika, J. (2024). *The Ethics of Advanced AI Assistants*. arXiv preprint arXiv:2404.16244. [https://arxiv.org/abs/2404.16244](https://arxiv.org/abs/2404.16244)
 
