@@ -103,17 +103,3 @@ What is the environmental impact of training and running M.A.V.I.S? All AI model
 [^13]: RASA Formbot Example Data. https://github.com/RasaHQ/rasa/blob/main/examples/formbot/data/nlu.yml ↩
 
 [^14]: MultiWOZ Dataset. https://github.com/budzianowski/multiwoz ↩
-
-1. Gabriel, I., Manzini, A., Keeling, G., Hendricks, L. A., Rieser, V., Iqbal, H., ... & Manyika, J. (2024). *The Ethics of Advanced AI Assistants*. arXiv preprint arXiv:2404.16244. [https://arxiv.org/abs/2404.16244](https://arxiv.org/abs/2404.16244)
-
-2. *LLASM: Large Language and Speech Model*. arXiv preprint arXiv:2308.15930. [https://arxiv.org/pdf/2308.15930](https://arxiv.org/pdf/2308.15930)
-
-3. *Understanding Older People’s Voice Interactions with Smart Voice Assistants: A New Modified Rule-Based Natural Language Processing Model with Human Input*. [https://pmc.ncbi.nlm.nih.gov/articles/PMC11135128/](https://pmc.ncbi.nlm.nih.gov/articles/PMC11135128/)
-
-4. *Natural Language Processing: An Introduction*. [https://www.researchgate.net/publication/51576224_Natural_language_processing_An_introduction](https://www.researchgate.net/publication/51576224_Natural_language_processing_An_introduction)
-
-5. *Real-Time Speech Emotion Analysis for Smart Home Assistants*. [https://ieeexplore.ieee.org/abstract/document/9352018](https://ieeexplore.ieee.org/abstract/document/9352018)
-
-6. *My Assistant SRSTC: Speech Recognition and Speech to Text Conversion*. [https://ieeexplore.ieee.org/abstract/document/10593324](https://ieeexplore.ieee.org/abstract/document/10593324)
-
-7. *Artificial Intelligence-Based Chatbot with Voice Assistance*. [https://ieeexplore.ieee.org/abstract/document/10545197](https://ieeexplore.ieee.org/abstract/document/10545197)
