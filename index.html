@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="Ryan Aubrey — CS master's student at Brown focused on computer vision, graphics, neurosymbolic 3D, and software engineering.">
+    <meta name="theme-color" content="#ffe94d">
+    <meta property="og:title" content="Ryan Aubrey">
+    <meta property="og:description" content="CS master's student at Brown focused on computer vision, graphics, neurosymbolic 3D, and software engineering.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ryanmaubrey.github.io/">
+    <meta property="og:image" content="https://ryanmaubrey.github.io/portrait.jpg">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23ffe94d'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='26' font-family='system-ui, sans-serif' font-weight='700' fill='%2316130f'%3ERA%3C/text%3E%3C/svg%3E">
+    <title>Ryan Aubrey</title>
+    <style>
+
+        /* ============================================================
+           Ryan Aubrey — portfolio v2
+           One coherent stylesheet: design tokens, then components,
+           then four responsive tiers (wide / mid / mobile / small).
+           ============================================================ */
+
+        :root {
+            /* color */
+            --ink: #16130f;
+            --ink-soft: #4b4438;
+            --ink-mute: #5c554a;
+            --ink-faint: #6f665a;
+            --meta: #7a6224;
+            --brand: #ffe94d;
+            --shell: #ece5d6;
+            --line: #e2d9c7;
+            --line-soft: #efe7d6;
+            --line-strong: #d8cdb6;
+            --ink-ui: #574f44;
+            --card: #fff;
+            --media-fill: linear-gradient(135deg, #f5eedf 0%, #fffaf0 100%);
+
+            /* spacing scale (4pt base) */
+            --space-2xs: 0.25rem;
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2.25rem;
+            --space-2xl: 3.25rem;
+
+            /* radii */
+            --r-sm: 10px;
+            --r-md: 14px;
+            --r-lg: 16px;
+            --r-xl: 22px;
+            --r-pill: 999px;
+
+            /* elevation */
+            --shadow-sm: 0 6px 18px rgba(22, 19, 15, 0.06);
+            --shadow-md: 0 10px 30px rgba(22, 19, 15, 0.16);
+            --shadow-lg: 0 22px 52px rgba(22, 19, 15, 0.18);
+
+            --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body {
+            touch-action: pan-y pinch-zoom;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        body {
+            margin: 0;
+            font-family: system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--ink);
+            background: #fff;
+            overflow-x: clip;
+        }
+        ::selection { background: var(--brand); color: var(--ink); }
+
+        img {
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            pointer-events: none;
+        }
+
+        /* ---------- page frame ---------- */
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+            gap: clamp(2rem, 4vw, 5rem);
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 0 clamp(2rem, 4vw, 4.5rem);
+        }
+
+        /* ---------- identity column ---------- */
+        .identity {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .name {
+            margin: 0 0 1.15rem;
+            font-size: clamp(2.5rem, 1.4vw + 1.6rem, 3.05rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.04;
+            text-wrap: balance;
+        }
+        .lead {
+            margin: 0;
+            max-width: 32rem;
+            font-size: 1.05rem;
+            line-height: 1.62;
+            color: var(--ink-soft);
+            text-wrap: pretty;
+        }
+
+        .cta {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-top: var(--space-lg);
+            padding: 0.75rem 1.2rem;
+            border: 1px solid var(--line-strong);
+            border-radius: var(--r-pill);
+            background: transparent;
+            color: var(--ink);
+            font: inherit;
+            font-weight: 600;
+            font-size: 0.94rem;
+            cursor: pointer;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: var(--brand);
+            transform: translateX(-101%);
+            transition: transform 0.45s var(--ease-out);
+        }
+        .cta:focus-visible {
+            border-color: var(--brand);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(22, 19, 15, 0.16);
+            outline: 2px solid var(--ink);
+            outline-offset: 3px;
+        }
+        .cta:focus-visible::before {
+            transform: translateX(0);
+        }
+        .cta-arrow {
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+        .cta:focus-visible .cta-arrow {
+            transform: translateY(3px);
+        }
+        /* hover only where hover actually exists; touch gets press feedback */
+        @media (hover: hover) {
+            .cta:hover {
+                border-color: var(--brand);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 26px rgba(22, 19, 15, 0.16);
+            }
+            .cta:hover::before { transform: translateX(0); }
+            .cta:hover .cta-arrow { transform: translateY(3px); }
+        }
+        @media (hover: none) {
+            .cta:active {
+                border-color: var(--brand);
+            }
+            .cta:active::before {
+                transform: translateX(0);
+                transition-duration: 0.2s;
+            }
+        }
+
+        /* ---------- snapshot deck ---------- */
+        .snapshots {
+            align-self: flex-start;
+            margin-top: var(--space-2xl);
+        }
+        .deck {
+            position: relative;
+            width: min(420px, calc(100vh - 400px), calc((100vw - 144px) * 0.4 - 20px));
+            height: min(420px, calc(100vh - 400px), calc((100vw - 144px) * 0.4 - 20px));
+            cursor: pointer;
+            outline: none;
+        }
+        .deck:focus-visible {
+            outline: 3px solid #a98600;
+            outline-offset: 7px;
+            border-radius: 20px;
+        }
+        .snap {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            background: var(--shell);
+            box-shadow: var(--shadow-md);
+            transform-origin: 50% 60%;
+            transition: transform 0.6s var(--ease-out),
+                        box-shadow 0.4s ease;
+            will-change: transform;
+        }
+        .snap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: var(--r-lg);
+            box-shadow: inset 0 0 0 1px rgba(22, 19, 15, 0.08);
+        }
+        .snap img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .snap.pos-0 { transform: rotate(-3deg) translate(0, 0)       scale(1);     z-index: 3; }
+        .snap.pos-1 { transform: rotate(4deg)  translate(10px, 8px)  scale(0.965); z-index: 2; }
+        .snap.pos-2 { transform: rotate(-6deg) translate(-8px, 16px) scale(0.93);  z-index: 1; }
+        .deck:focus-visible .snap.pos-0 {
+            transform: rotate(-3deg) translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 42px rgba(22, 19, 15, 0.24);
+        }
+        @media (hover: hover) {
+            .deck:hover .snap.pos-0 {
+                transform: rotate(-3deg) translateY(-10px) scale(1.03);
+                box-shadow: 0 20px 42px rgba(22, 19, 15, 0.24);
+            }
+        }
+        .snap.leaving {
+            z-index: 6;
+            animation: deal 0.6s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+        }
+        @keyframes deal {
+            0%   { transform: rotate(-3deg)  translate(0, 0)        scale(1);    box-shadow: 0 10px 30px rgba(22,19,15,0.16); }
+            40%  { transform: rotate(-13deg) translate(-36px, -26px) scale(1.05); box-shadow: 0 26px 48px rgba(22,19,15,0.28); }
+            56%  { z-index: 0; }
+            100% { transform: rotate(-6deg)  translate(-8px, 16px)  scale(0.93); z-index: 0; box-shadow: 0 10px 30px rgba(22,19,15,0.16); }
+        }
+
+        /* ---------- rail & arch ---------- */
+        .rail {
+            position: relative;
+            padding: 0;
+            --bubble-offset: 270px;
+            --build-offset: clamp(360px, 32vw, 430px);
+        }
+        .rail-copy {
+            display: block;
+        }
+
+        .arch-line {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ---------- bubbles ---------- */
+        .bubble {
+            position: relative;
+            padding-left: var(--bubble-offset);
+            margin-bottom: 35vh;
+            min-height: 180px;
+        }
+
+        .bubble-title {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 180px;
+            height: 180px;
+            margin: 0;
+            border-radius: 50%;
+            background: var(--shell);
+            color: var(--ink-ui);
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 0 var(--space-md);
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            line-height: 1.15;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: default;
+            box-shadow: 0 6px 22px rgba(22, 19, 15, 0.08);
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .bubble.is-active .bubble-title {
+            background: var(--brand);
+            color: var(--ink);
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(22, 19, 15, 0.18);
+        }
+
+        .bubble-items {
+            position: absolute;
+            left: var(--bubble-offset);
+            right: 0;
+            top: 50%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2.1rem;
+            opacity: 0;
+            transform: translateY(-50%) translateX(12px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+        }
+        .bubble.is-active .bubble-items {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+            pointer-events: auto;
+        }
+        /* keyboard focus must never land on invisible links (desktop reveal) */
+        @media (min-width: 901px) {
+            .bubble:focus-within .bubble-items {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+                pointer-events: auto;
+            }
+        }
+
+        .no-anim .bubble-title,
+        .no-anim .bubble-items {
+            transition: none !important;
+        }
+
+        /* ---------- entries ---------- */
+        .entry-meta {
+            display: block;
+            margin-bottom: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 650;
+            letter-spacing: 0.01em;
+            color: var(--meta);
+        }
+        .entry-title {
+            margin: 0;
+            font-size: 1.45rem;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            text-wrap: balance;
+        }
+        .entry-desc {
+            margin: 0.5rem 0 0;
+            font-size: 1.08rem;
+            line-height: 1.6;
+            color: var(--ink-mute);
+            text-wrap: pretty;
+        }
+        .entry-authors {
+            margin: 0.45rem 0 0;
+            font-size: 1rem;
+            line-height: 1.55;
+            color: var(--ink-faint);
+        }
+        .entry-authors strong { color: var(--ink); font-weight: 600; }
+
+        /* skills read as a compact label/value table on wide screens */
+        .skills-list { gap: 1.1rem; }
+        .skills-list .entry {
+            display: grid;
+            grid-template-columns: 10.5rem 1fr;
+            column-gap: var(--space-lg);
+            align-items: baseline;
+        }
+        .skills-list .entry-meta { margin-bottom: 0; }
+        .skills-list .entry-desc { margin-top: 0; font-size: 1.02rem; }
+
+        /* ---------- interests media ---------- */
+        .media-row {
+            display: flex;
+            gap: 0.9rem;
+            margin-top: 0.6rem;
+        }
+        .media-card {
+            margin: 0;
+            width: 172px;
+        }
+        .media-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(22, 19, 15, 0.14);
+            box-shadow: 0 10px 24px rgba(22, 19, 15, 0.14);
+            background: #14110d;
+        }
+        .media-blur {
+            position: absolute;
+            inset: -10%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(16px) brightness(0.9) saturate(1.05);
+            transform: scale(1.06);
+        }
+        .media-thumb img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .media-card figcaption {
+            margin-top: 0.55rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink-mute);
+            text-align: center;
+        }
+
+        /* ---------- Building: translucent scrollable panel ---------- */
+        .build-items {
+            display: block;
+            left: var(--build-offset);
+            right: auto;
+            width: min(940px, calc(100vw - var(--build-offset) - 1.5rem));
+        }
+        .build-panel {
+            width: 100%;
+            height: clamp(600px, 74vh, 800px);
+            position: relative;
+            border-radius: var(--r-xl);
+            border: 1px solid rgba(22, 19, 15, 0.16);
+            background: rgba(252, 250, 245, 0.84);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-lg),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+            overflow: hidden;
+        }
+        .build-scroll {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 var(--space-md);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+                    mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(22, 19, 15, 0.22) transparent;
+        }
+        .build-scroll::-webkit-scrollbar { width: 8px; }
+        .build-scroll::-webkit-scrollbar-track { background: transparent; }
+        .build-scroll::-webkit-scrollbar-thumb {
+            background: rgba(22, 19, 15, 0.2);
+            border-radius: var(--r-pill);
+        }
+        .build-list {
+            list-style: none;
+            margin: 0;
+            padding: var(--space-lg) 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+        .build-card {
+            border: 1px solid var(--line-soft);
+            border-radius: var(--r-md);
+            background: var(--card);
+            box-shadow: var(--shadow-sm);
+            padding: 0.9rem;
+            overflow: hidden;
+        }
+        .build-card .entry-title { font-size: 1.25rem; }
+        .build-card .entry-desc { font-size: 1rem; margin-top: 0.4rem; }
+
+        /* project media inside Building cards: contained, never overflowing */
+        .build-card .project-media {
+            margin: -0.9rem -0.9rem 0.9rem;
+            width: calc(100% + 1.8rem);
+            overflow: hidden;
+            border-radius: var(--r-md) var(--r-md) 0 0;
+            border: none;
+            border-bottom: 1px solid var(--line-soft);
+            background: var(--media-fill);
+            display: grid;
+            place-items: center;
+            box-shadow: inset 0 0 0 1px rgba(22, 19, 15, 0.03);
+        }
+        .build-card .project-media img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            border: 0;
+            border-radius: 0;
+        }
+        .build-card .project-media--landscape {
+            aspect-ratio: 16 / 9;
+            height: auto;
+            min-height: clamp(230px, 27svh, 350px);
+            max-height: clamp(300px, 36svh, 430px);
+        }
+        .build-card .project-media--wide {
+            aspect-ratio: 8 / 3;
+            height: auto;
+            min-height: 0;
+            max-height: none;
+        }
+        .build-card .project-media--ultrawide {
+            aspect-ratio: 13 / 3;
+            height: auto;
+            min-height: 0;
+            max-height: none;
+            background: #05060a;
+        }
+        .build-card .project-media--phone {
+            height: clamp(420px, 55svh, 620px);
+            background:
+                radial-gradient(circle at 50% 20%, rgba(255, 233, 77, 0.18), transparent 35%),
+                var(--media-fill);
+        }
+        .build-card .project-media--phone img {
+            width: auto;
+            height: calc(100% - 28px);
+            max-width: calc(100% - 28px);
+            border-radius: 26px;
+            box-shadow: 0 16px 34px rgba(22, 19, 15, 0.18);
+        }
+
+        /* ---------- chips ---------- */
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 0.65rem;
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.32rem 0.95rem;
+            border: 1px solid var(--line);
+            border-radius: var(--r-pill);
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink-ui);
+            text-decoration: none;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+        @media (hover: hover) {
+            .chip:hover {
+                background: var(--brand);
+                border-color: var(--brand);
+                color: var(--ink);
+                transform: translateY(-1px);
+            }
+        }
+        @media (hover: none) {
+            .chip:active {
+                background: var(--brand);
+                border-color: var(--brand);
+                color: var(--ink);
+            }
+        }
+        .chip:focus-visible {
+            outline: 2px solid var(--ink);
+            outline-offset: 3px;
+        }
+        .contact-entry .entry-meta:last-child {
+            margin: 0.85rem 0 0;
+            color: var(--ink-faint);
+        }
+
+        /* ============================================================
+           Responsive tiers
+           ============================================================ */
+
+        /* --- wide desktop: roomier Building panel --- */
+        @media (min-width: 1181px) {
+            .layout {
+                max-width: 1860px;
+                grid-template-columns: minmax(300px, 0.58fr) minmax(0, 1.42fr);
+                gap: clamp(2rem, 3.4vw, 4.75rem);
+            }
+            .rail {
+                --bubble-offset: clamp(245px, 18vw, 300px);
+                --build-offset: clamp(395px, 30vw, 465px);
+            }
+            .build-items {
+                width: min(1080px, calc(100vw - var(--build-offset) - 2rem));
+            }
+            .build-panel {
+                height: clamp(650px, 78svh, 880px);
+                border-radius: 24px;
+                background: rgba(252, 250, 245, 0.88);
+            }
+            .build-card .project-media--landscape {
+                min-height: clamp(280px, 31svh, 420px);
+            }
+            .build-card .project-media--phone {
+                height: clamp(500px, 62svh, 720px);
+            }
+        }
+
+        /* --- narrow desktop / vertical monitor / iPad landscape --- */
+        @media (min-width: 901px) and (max-width: 1180px) {
+            .layout {
+                grid-template-columns: minmax(235px, 0.42fr) minmax(0, 1fr);
+                gap: clamp(1.2rem, 2.2vw, 2.2rem);
+                padding-inline: clamp(1.1rem, 2.2vw, 2rem);
+            }
+            .identity {
+                height: 100svh;
+                min-height: 720px;
+            }
+            .name { font-size: clamp(2rem, 3.1vw, 2.45rem); }
+            .lead { font-size: 0.98rem; line-height: 1.55; }
+            .cta { font-size: 0.88rem; padding: 0.66rem 0.95rem; }
+            .deck {
+                width: min(320px, calc(100vw * 0.27), calc(100svh - 430px));
+                height: min(320px, calc(100vw * 0.27), calc(100svh - 430px));
+                min-width: 215px;
+                min-height: 215px;
+            }
+            .rail {
+                --bubble-offset: clamp(190px, 20vw, 230px);
+                --build-offset: clamp(270px, 31vw, 345px);
+            }
+            .bubble {
+                min-height: 170px;
+                margin-bottom: 32svh;
+            }
+            .bubble-title {
+                width: clamp(142px, 15vw, 166px);
+                height: clamp(142px, 15vw, 166px);
+                font-size: clamp(1.12rem, 1.6vw, 1.28rem);
+            }
+            .bubble-items:not(.build-items) {
+                max-width: min(620px, calc(100vw - var(--bubble-offset) - 2.4rem));
+            }
+            .entry-title { font-size: clamp(1.22rem, 2vw, 1.4rem); }
+            .entry-desc { font-size: clamp(0.98rem, 1.5vw, 1.05rem); }
+            .entry-authors { font-size: 0.98rem; }
+            .skills-list .entry { grid-template-columns: 9rem 1fr; }
+            .build-items {
+                width: min(760px, calc(100vw - var(--build-offset) - 1rem));
+            }
+            .build-panel {
+                height: clamp(590px, 72svh, 790px);
+                background: rgba(252, 250, 245, 0.9);
+            }
+            .build-card .project-media--landscape {
+                min-height: clamp(210px, 25svh, 300px);
+            }
+            .build-card .project-media--phone {
+                height: clamp(390px, 52svh, 560px);
+            }
+        }
+
+        /* very tall portrait monitors: keep the rail from feeling lost */
+        @media (min-width: 901px) and (max-width: 1180px) and (min-height: 1250px) {
+            .identity { justify-content: flex-start; padding-top: 12svh; }
+            .bubble { margin-bottom: 24svh; }
+            .build-panel { height: min(820px, 58svh); }
+        }
+
+        /* --- iPad portrait & phones: stacked, always-visible, no loop --- */
+        @media (max-width: 900px) {
+            .layout {
+                display: block;
+                max-width: 720px;
+                padding-inline: max(1.05rem, env(safe-area-inset-left)) max(1.05rem, env(safe-area-inset-right));
+            }
+            .identity {
+                position: static;
+                height: auto;
+                min-height: 100svh;
+                justify-content: center;
+                padding: clamp(2.4rem, 8svh, 5rem) 0 clamp(2rem, 6svh, 4rem);
+            }
+            .name { font-size: clamp(2.15rem, 9vw, 4rem); }
+            .lead {
+                font-size: clamp(1rem, 2.5vw, 1.16rem);
+                max-width: 38rem;
+            }
+            .cta { max-width: 100%; }
+            .arch-line { display: none; }
+            .snapshots { align-self: center; margin-top: clamp(2rem, 7svh, 4rem); }
+            .deck {
+                margin: 0 auto;
+                width: min(430px, calc(100vw - 3rem), 62svh);
+                height: min(430px, calc(100vw - 3rem), 62svh);
+            }
+            .rail { padding-bottom: 4rem; }
+            .bubble {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: 0;
+                padding: 0;
+                margin-bottom: clamp(2.75rem, 7svh, 4.75rem);
+                text-align: center;
+            }
+            .bubble-title {
+                position: static;
+                margin: 0 auto;
+                width: clamp(116px, 28vw, 150px);
+                height: clamp(116px, 28vw, 150px);
+                font-size: clamp(1.05rem, 3.5vw, 1.28rem);
+                translate: none !important;
+            }
+            .bubble.is-active .bubble-title { transform: scale(1.04); }
+            /* items sit in-flow under the circle, always visible */
+            .bubble-items,
+            .build-items {
+                position: static;
+                width: 100%;
+                max-width: 38rem;
+                margin: clamp(1rem, 3vw, 1.35rem) auto 0;
+                text-align: left;
+                transform: none;
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .entry-title { font-size: clamp(1.2rem, 4.7vw, 1.55rem); }
+            .entry-desc { font-size: clamp(0.98rem, 3.6vw, 1.08rem); }
+            .entry-authors { font-size: clamp(0.94rem, 3.3vw, 1.02rem); }
+            .skills-list { gap: 1.35rem; }
+            .skills-list .entry { display: block; }
+            .skills-list .entry-meta { margin-bottom: 0.35rem; }
+            .media-row {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .media-card { width: min(172px, calc(50vw - 1.7rem)); }
+            .build-panel {
+                height: auto;
+                max-width: 38rem;
+                overflow: visible;
+                border-radius: 20px;
+            }
+            .build-scroll {
+                height: auto;
+                overflow: visible;
+                padding: 0;
+                -webkit-mask-image: none;
+                        mask-image: none;
+            }
+            .build-list { padding: 0.85rem; gap: 0.9rem; }
+            .build-card { padding: 0.85rem; text-align: left; }
+            .build-card .project-media {
+                margin: -0.85rem -0.85rem 0.9rem;
+                width: calc(100% + 1.7rem);
+            }
+            .build-card .project-media--landscape {
+                min-height: 0;
+                height: auto;
+                aspect-ratio: 16 / 10;
+            }
+            .build-card .project-media--ultrawide {
+                aspect-ratio: 13 / 4;
+            }
+            .build-card .project-media--phone {
+                height: min(118vw, 620px);
+                min-height: 430px;
+            }
+            .build-card .project-media--phone img {
+                height: calc(100% - 22px);
+                max-width: calc(100% - 22px);
+                border-radius: 22px;
+            }
+            /* comfortable tap targets */
+            .chip { padding: 0.55rem 1.05rem; }
+            .chip-row { gap: 0.55rem; justify-content: flex-start; }
+            .contact-entry .chip-row { justify-content: center; }
+        }
+
+        /* --- small phones --- */
+        @media (max-width: 480px) {
+            .layout { padding-inline: max(0.95rem, env(safe-area-inset-left)) max(0.95rem, env(safe-area-inset-right)); }
+            .identity { min-height: 92svh; }
+            .deck {
+                width: min(340px, calc(100vw - 2.4rem), 62svh);
+                height: min(340px, calc(100vw - 2.4rem), 62svh);
+            }
+            .bubble-title {
+                width: 112px;
+                height: 112px;
+                font-size: 1.02rem;
+            }
+            .media-card { width: min(160px, calc(50vw - 1.4rem)); }
+            .chip { padding: 0.5rem 0.85rem; font-size: 0.88rem; }
+            .build-list { padding: 0.65rem; }
+        }
+        @media (max-width: 420px) {
+            .build-card .project-media--phone {
+                min-height: 390px;
+                height: min(124vw, 560px);
+            }
+        }
+
+        /* ---------- input method: touch targets by pointer, not width ---------- */
+        @media (pointer: coarse) {
+            .chip { padding: 0.72rem 1.15rem; }
+            .chip-row { gap: 0.6rem; }
+            .cta { padding: 0.85rem 1.3rem; }
+        }
+
+        /* ---------- forced colors (Windows High Contrast) ---------- */
+        @media (forced-colors: active) {
+            .bubble-title, .chip, .cta, .snap, .build-card, .build-panel, .media-thumb {
+                border: 1px solid ButtonText;
+            }
+            .bubble.is-active .bubble-title {
+                border: 3px solid Highlight;
+            }
+            .cta::before { display: none; }
+        }
+
+        /* ---------- reduced motion ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            .snap { transition: none; }
+            .snap.leaving { animation: none; }
+            .deck:hover .snap.pos-0,
+            .deck:focus-visible .snap.pos-0 { transform: rotate(-3deg) scale(1); }
+            .cta, .cta::before, .cta-arrow, .chip,
+            .bubble-title, .bubble-items { transition-duration: 0.01ms; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <header class="identity">
+            <h1 class="name">Ryan Aubrey</h1>
+            <p class="lead">Master's student in CS at Brown working on neurosymbolic 3D — transferring
+            surface detail between meshes with vision-transformer features. Into computer vision,
+            graphics, and shipping real software; co-founder of AthLink.</p>
+            <button class="cta" type="button" id="contactCta">
+                <span class="cta-label">Looking for Fall 2026 SWE / ML internships</span>
+                <span class="cta-arrow" aria-hidden="true">↓</span>
+            </button>
+
+            <div class="snapshots">
+                <div class="deck" id="deck" role="button" tabindex="0" aria-label="Photos of Ryan — tap to shuffle">
+                    <figure class="snap"><img decoding="async" src="portrait.jpg?v=11" alt="Ryan in a suit and tie" draggable="false"></figure>
+                    <figure class="snap"><img decoding="async" src="throw.jpg" alt="Ryan throwing shot put at a track meet" draggable="false"></figure>
+                    <figure class="snap"><img decoding="async" src="buffalo.jpg" alt="Ryan wearing a horned bison-fur coat" draggable="false"></figure>
+                </div>
+            </div>
+        </header>
+
+        <main class="rail">
+            <section class="bubble" data-cat="contact">
+                <h2 class="bubble-title">Contact</h2>
+                <ul class="bubble-items">
+                    <li class="entry contact-entry">
+                        <span class="entry-meta">Get in touch</span>
+                        <div class="chip-row">
+                            <a class="chip" href="mailto:ryan_aubrey@brown.edu">Email&nbsp;↗</a>
+                            <a class="chip" href="https://github.com/RyanMAubrey" target="_blank" rel="noopener noreferrer">GitHub&nbsp;↗</a>
+                            <a class="chip" href="https://linkedin.com/in/ryan-m-aubrey" target="_blank" rel="noopener noreferrer">LinkedIn&nbsp;↗</a>
+                            <a class="chip" href="Aubrey_Resume.pdf" target="_blank" rel="noopener noreferrer">CV&nbsp;↗</a>
+                        </div>
+                        <span class="entry-meta">San Francisco, California</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bubble" data-cat="interests">
+                <h2 class="bubble-title">Interests</h2>
+                <ul class="bubble-items">
+                    <li class="entry">
+                        <span class="entry-meta">Hobbies</span>
+                        <p class="entry-desc">Traveling · Cooking · Gaming · Reading fantasy novels</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">Top media this month</span>
+                        <div class="media-row">
+                            <figure class="media-card">
+                                <div class="media-thumb">
+                                    <div class="media-blur" style="background-image:url('spider-noir.webp')"></div>
+                                    <img decoding="async" src="spider-noir.webp" alt="Spider-Noir" loading="lazy" draggable="false">
+                                </div>
+                                <figcaption>Spider-Noir</figcaption>
+                            </figure>
+                            <figure class="media-card">
+                                <div class="media-thumb">
+                                    <div class="media-blur" style="background-image:url('widows-bay.webp')"></div>
+                                    <img decoding="async" src="widows-bay.webp" alt="Widow's Bay" loading="lazy" draggable="false">
+                                </div>
+                                <figcaption>Widow's Bay</figcaption>
+                            </figure>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bubble" data-cat="research">
+                <h2 class="bubble-title">Research</h2>
+                <ul class="bubble-items">
+                    <li class="entry">
+                        <span class="entry-meta">2026 – Present</span>
+                        <h3 class="entry-title">Graduate Researcher · Brown University</h3>
+                        <p class="entry-desc">Developing neurosymbolic surface-detail transfer between meshes via ViT features, with the full pipeline running on Brown's Oscar HPC cluster.</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">2024 – 2025</span>
+                        <h3 class="entry-title">Supervised Study · Harvey Mudd</h3>
+                        <p class="entry-desc">Benchmarked six monocular-depth models across 4,269 frames and led a four-person synthetic-data team.</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">Summer 2024</span>
+                        <h3 class="entry-title">NSF-REU · University of Utah</h3>
+                        <p class="entry-desc">Investigated explainable AI for ViTs and CNNs using Guided Grad-CAM and SSIM feature analysis.</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">Spring 2024</span>
+                        <h3 class="entry-title">Research Assistant · Pomona</h3>
+                        <p class="entry-desc">Conducted a mixed-methods study of privacy-label comprehension across 116 technical terms.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bubble" data-cat="publications">
+                <h2 class="bubble-title">Publications</h2>
+                <ul class="bubble-items">
+                    <li class="entry">
+                        <span class="entry-meta">SCAIR 2025</span>
+                        <h3 class="entry-title">Depth Anyviewpoint? Evaluating Monocular Depth Over Viewpoint Sequences</h3>
+                        <p class="entry-authors">Rode, Zhang, <strong>Ryan Aubrey</strong>, Li, Huang, Chu, Dowd, Wloka.</p>
+                        <div class="chip-row">
+                            <a class="chip" href="https://www.scair2025.org/" target="_blank" rel="noopener noreferrer">SCAIR&nbsp;↗</a>
+                            <a class="chip" href="monocular_consistency_SCAIR.pdf" target="_blank" rel="noopener noreferrer">PDF&nbsp;↗</a>
+                        </div>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">USENIX SOUPS 2025</span>
+                        <h3 class="entry-title">User Understandings of Technical Terms in App Privacy Labels</h3>
+                        <p class="entry-authors">Keswani, Walker, Clement, Kitur, Wonghirundacha, <strong>Ryan Aubrey</strong>, Song, Birrell.</p>
+                        <div class="chip-row">
+                            <a class="chip" href="https://www.usenix.org/conference/soups2025/presentation/keswani" target="_blank" rel="noopener noreferrer">USENIX&nbsp;↗</a>
+                            <a class="chip" href="soups2025-keswani.pdf" target="_blank" rel="noopener noreferrer">PDF&nbsp;↗</a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bubble" data-cat="building">
+                <h2 class="bubble-title">Building</h2>
+                <div class="bubble-items build-items">
+                    <div class="build-panel">
+                        <div class="build-scroll">
+                            <ul class="build-list">
+                                <li class="entry build-card">
+                                    <div class="project-media project-media--landscape">
+                                        <img src="turtle_video.gif?v=7" alt="Simulated turtle swimming via a variational integrator on SE(3)" loading="lazy" decoding="async" draggable="false">
+                                    </div>
+                                    <span class="entry-meta">C++20 · Eigen · Qt6 / OpenGL</span>
+                                    <h3 class="entry-title">Going with the Flow</h3>
+                                    <p class="entry-desc">From-scratch implementation of the SIGGRAPH 2024 fluid-structure paper — a turtle swims with no fluid grid, just a variational integrator on SE(3). Extended with an original piecewise added-mass model.</p>
+                                    <div class="chip-row"><a class="chip" href="https://github.com/RyanMAubrey/GoingWithTheFlow" target="_blank" rel="noopener noreferrer">GitHub&nbsp;↗</a></div>
+                                </li>
+                                <li class="entry build-card">
+                                    <div class="project-media project-media--ultrawide">
+                                        <img src="asteroids.gif?v=1" alt="Neural Asteroids generated mesh turntable" loading="lazy" decoding="async" draggable="false">
+                                    </div>
+                                    <span class="entry-meta">Python · PyTorch · Open3D · DeepSDF · Marching Cubes</span>
+                                    <h3 class="entry-title">Neural Asteroids</h3>
+                                    <p class="entry-desc">Pipeline that sculpts procedural asteroid SDFs, trains a DeepSDF-style auto-decoder with latent shape codes, then samples the learned space to generate new OBJ meshes for Blender.</p>
+                                    <div class="chip-row"><a class="chip" href="https://github.com/RyanMAubrey/Latent-Asteroids" target="_blank" rel="noopener noreferrer">GitHub&nbsp;↗</a></div>
+                                </li>
+                                <li class="entry build-card">
+                                    <div class="project-media project-media--phone">
+                                        <img src="app_video.gif?v=7" alt="AthLink iOS app demo" loading="lazy" decoding="async" draggable="false">
+                                    </div>
+                                    <span class="entry-meta">Swift · SwiftUI · Supabase · MapKit</span>
+                                    <h3 class="entry-title">AthLink</h3>
+                                    <p class="entry-desc">Native iOS marketplace pairing athletes with coaches — geo-search, real-time chat, scheduling, payments, and PDF receipts. Co-founder &amp; CTO.</p>
+                                    <div class="chip-row"><a class="chip" href="https://github.com/RyanMAubrey/AthLink" target="_blank" rel="noopener noreferrer">GitHub&nbsp;↗</a></div>
+                                </li>
+                                <li class="entry build-card">
+                                    <div class="project-media project-media--landscape">
+                                        <img src="hand_video.gif?v=7" alt="Gesture Engine hand tracking demo" loading="lazy" decoding="async" draggable="false">
+                                    </div>
+                                    <span class="entry-meta">Python · MediaPipe · WebRTC · Electron</span>
+                                    <h3 class="entry-title">Gesture Engine</h3>
+                                    <p class="entry-desc">Control YouTube with your hands. Webcam → MediaPipe → WebRTC drives a real Chrome over the DevTools Protocol. No extension, no fakery.</p>
+                                    <div class="chip-row"><a class="chip" href="https://github.com/RyanMAubrey/Gesture-Engine" target="_blank" rel="noopener noreferrer">GitHub&nbsp;↗</a></div>
+                                </li>
+                                <li class="entry build-card">
+                                    <div class="project-media project-media--landscape project-media--wide">
+                                        <img src="dungeon_video.gif?v=1" alt="Dungeon Core terminal roguelike demo" loading="lazy" decoding="async" draggable="false">
+                                    </div>
+                                    <span class="entry-meta">Rust · bevy_ecs · ratatui · Ollama</span>
+                                    <h3 class="entry-title">Dungeon Core</h3>
+                                    <p class="entry-desc">Dwarf-Fortress-style roguelike where every creature thinks — behavior trees, tiered local LLMs, and an "Imagination Engine" that uses the game sim itself as a Code World Model.</p>
+                                    <div class="chip-row"><a class="chip" href="https://github.com/RyanMAubrey/Dungeon-Core" target="_blank" rel="noopener noreferrer">GitHub&nbsp;↗</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bubble" data-cat="skills">
+                <h2 class="bubble-title">Skills</h2>
+                <ul class="bubble-items skills-list">
+                    <li class="entry">
+                        <span class="entry-meta">Programming</span>
+                        <p class="entry-desc">Python · Java · TypeScript · Rust · C/C++ · Swift · Haskell · R · HTML/CSS</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">ML &amp; Computer Vision</span>
+                        <p class="entry-desc">PyTorch · TensorFlow · Vision Transformers · CNNs · Guided Grad-CAM · SSIM · monocular depth · neurosymbolic 3D</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">Graphics &amp; 3D</span>
+                        <p class="entry-desc">Blender · Unreal Engine · OpenGL · Qt6 · Eigen</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">Design &amp; Tools</span>
+                        <p class="entry-desc">Figma · Photoshop · Illustrator · Xcode · LaTeX · Excel · SLURM / HPC</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">Spoken</span>
+                        <p class="entry-desc">Mandarin (5 years)</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bubble" data-cat="education">
+                <h2 class="bubble-title">Education</h2>
+                <ul class="bubble-items">
+                    <li class="entry">
+                        <span class="entry-meta">Sc.M. Computer Science (AI/ML) · Expected May 2027 · GPA 4.0</span>
+                        <h3 class="entry-title">Brown University</h3>
+                        <p class="entry-desc">Advanced Computer Graphics, Machine Learning, Computer Systems, and Software Engineering. Member of AGI @ Brown.</p>
+                    </li>
+                    <li class="entry">
+                        <span class="entry-meta">B.A. Computer Science · Media Studies minor · May 2025 · GPA 3.9</span>
+                        <h3 class="entry-title">Pomona College</h3>
+                        <p class="entry-desc">Computer Vision, Neural Networks, Data Structures, Advanced Programming, and Linear Algebra. Pomona College Scholar and four-year Varsity Track &amp; Field thrower (Shot Put / Discus); SCIAC Athlete of the Week.</p>
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+        const rail = document.querySelector('.rail');
+        const originalRailHTML = rail.innerHTML;
+
+        const MOBILE_QUERY = window.matchMedia('(max-width: 900px)');
+        const COPIES = MOBILE_QUERY.matches ? 1 : 3;
+        const ACCESSIBLE_COPY = Math.floor(COPIES / 2);
+        if (COPIES > 1) {
+            rail.innerHTML = Array.from({ length: COPIES }, (_, i) =>
+                `<div class="rail-copy" data-copy="${i}"${i === ACCESSIBLE_COPY ? '' : ' aria-hidden="true"'}>${originalRailHTML}</div>`
+            ).join('');
+            rail.querySelectorAll('.rail-copy[aria-hidden="true"] a, .rail-copy[aria-hidden="true"] button, .rail-copy[aria-hidden="true"] [tabindex]')
+                .forEach(el => el.setAttribute('tabindex', '-1'));
+        }
+        MOBILE_QUERY.addEventListener('change', () => window.location.reload());
+
+        const bubbles = Array.from(rail.querySelectorAll('.bubble'));
+        const perCopy = Math.floor(bubbles.length / COPIES);
+        bubbles.forEach(b => { b._title = b.querySelector('.bubble-title'); });
+
+        function bulge() {
+            return window.innerWidth <= 900 ? 0 : 160;
+        }
+
+        function archOffset(dy) {
+            if (dy < -2) dy = -2; else if (dy > 2) dy = 2;
+            return -bulge() * dy * dy;
+        }
+
+        const SVGNS = 'http://www.w3.org/2000/svg';
+        const archSvg = document.createElementNS(SVGNS, 'svg');
+        archSvg.setAttribute('class', 'arch-line');
+        const archPath = document.createElementNS(SVGNS, 'path');
+        archPath.setAttribute('fill', 'none');
+        archPath.setAttribute('stroke',
+            getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || '#e2d9c7');
+        archPath.setAttribute('stroke-width', '2');
+        archSvg.appendChild(archPath);
+        document.body.appendChild(archSvg);
+
+        function drawArch() {
+            const vw = window.innerWidth, vh = window.innerHeight;
+            const baseX = rail.getBoundingClientRect().left + 90;
+            let d = '';
+            for (let i = 0; i <= 32; i++) {
+                const y = vh * i / 32;
+                const x = baseX + archOffset((y - vh / 2) / (vh / 2));
+                d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+            }
+            archPath.setAttribute('d', d);
+            archSvg.setAttribute('viewBox', '0 0 ' + vw + ' ' + vh);
+        }
+        let cycle = 0;
+        let lo = 0, hi = 0;
+        let ticking = false;
+        let activeBubble = null;
+        let isSpinning = false;
+        let spinCancelled = false;
+        let started = false;
+        let animToken = 0;
+
+        function measure() {
+            if (COPIES < 2) {
+                cycle = 0;
+                lo = 0;
+                hi = document.body.scrollHeight;
+                drawArch();
+                return;
+            }
+            cycle = bubbles[perCopy].offsetTop - bubbles[0].offsetTop;
+            const firstLoopBubble = bubbles[perCopy];
+            const firstAfterLoopBubble = bubbles[2 * perCopy];
+            lo = firstLoopBubble.offsetTop + firstLoopBubble.offsetHeight / 2 - window.innerHeight / 2;
+            hi = firstAfterLoopBubble.offsetTop + firstAfterLoopBubble.offsetHeight / 2 - window.innerHeight / 2;
+            drawArch();
+        }
+
+        function loopGuard() {
+            if (isSpinning || COPIES < 2) return;
+            const y = window.scrollY;
+            if (y < lo || y >= hi) {
+                const span = hi - lo;
+                const root = document.documentElement;
+                root.classList.add('no-anim');
+                window.scrollTo(0, ((y - lo) % span + span) % span + lo);
+                updateActive();
+                requestAnimationFrame(() =>
+                    requestAnimationFrame(() => root.classList.remove('no-anim')));
+            }
+        }
+
+        function setActive(b) {
+            if (b === activeBubble) return;
+            activeBubble = b;
+            for (const x of bubbles) x.classList.toggle('is-active', x === b);
+        }
+
+        function updateActive() {
+            const middle = window.innerHeight / 2;
+            let closest = null, smallest = Infinity, activeDist = Infinity;
+            for (const b of bubbles) {
+                const box = b.getBoundingClientRect();
+                const cy = box.top + box.height / 2;
+                b._title.style.translate = archOffset((cy - middle) / middle).toFixed(1) + 'px';
+                const d = Math.abs(cy - middle);
+                if (b === activeBubble) activeDist = d;
+                if (d < smallest) { smallest = d; closest = b; }
+            }
+            if (!closest) return;
+            if (activeBubble && closest !== activeBubble && activeDist - smallest < 40) return;
+            setActive(closest);
+        }
+
+        function onScroll() {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                loopGuard();
+                updateActive();
+                ticking = false;
+            });
+        }
+
+        function spinIntro() {
+            if (COPIES < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                updateActive();
+                return;
+            }
+            const target = bubbles[ACCESSIBLE_COPY * perCopy];
+            const endY = target.offsetTop + target.offsetHeight / 2 - window.innerHeight / 2;
+            const startY = 0;
+            const spinDist = Math.max(0, endY - startY);
+            const dur = 2000;
+            const ease = p => 1 - Math.pow(1 - p, 3);
+            let t0 = null;
+            const myToken = ++animToken;
+            isSpinning = true;
+            window.scrollTo(0, startY);
+            function step(ts) {
+                if (myToken !== animToken) return;
+                if (spinCancelled) {
+                    isSpinning = false;
+                    loopGuard();
+                    updateActive();
+                    return;
+                }
+                if (t0 === null) t0 = ts;
+                const p = Math.min((ts - t0) / dur, 1);
+                window.scrollTo(0, startY + spinDist * ease(p));
+                if (p < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    isSpinning = false;
+                    updateActive();
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        function init() {
+            measure();
+            if (started) return;
+            started = true;
+            spinIntro();
+        }
+
+        function nearestByCat(cat) {
+            const middle = window.innerHeight / 2;
+            let best = null, bd = Infinity;
+            for (const b of bubbles) {
+                if (b.dataset.cat !== cat) continue;
+                const box = b.getBoundingClientRect();
+                const d = Math.abs(box.top + box.height / 2 - middle);
+                if (d < bd) { bd = d; best = b; }
+            }
+            return best;
+        }
+
+        function scrollToBubble(b, dur = 950) {
+            if (!b) return;
+            const box = b.getBoundingClientRect();
+            const delta = (box.top + box.height / 2) - window.innerHeight / 2;
+            const startY = window.scrollY;
+            const ease = p => 1 - Math.pow(1 - p, 3);
+            const myToken = ++animToken;
+            let t0 = null;
+            isSpinning = true;
+            function step(ts) {
+                if (myToken !== animToken) return;
+                if (t0 === null) t0 = ts;
+                const p = Math.min((ts - t0) / dur, 1);
+                window.scrollTo(0, startY + delta * ease(p));
+                if (p < 1) requestAnimationFrame(step);
+                else { isSpinning = false; loopGuard(); updateActive(); }
+            }
+            requestAnimationFrame(step);
+        }
+
+        const contactCta = document.getElementById('contactCta');
+        if (contactCta) contactCta.addEventListener('click', () =>
+            scrollToBubble(nearestByCat('contact')));
+
+        rail.addEventListener('focusin', (e) => {
+            const b = e.target.closest('.bubble');
+            if (b) setActive(b);
+        });
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', () => { measure(); updateActive(); });
+        window.addEventListener('load', () => { measure(); });
+        ['wheel', 'touchstart', 'keydown'].forEach(ev =>
+            window.addEventListener(ev, () => { spinCancelled = true; }, { passive: true, once: true }));
+        init();
+    </script>
+
+    <script>
+        (function () {
+            const deck = document.getElementById('deck');
+            if (!deck) return;
+            const cards = Array.from(deck.querySelectorAll('.snap'));
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const DELAY = 3000;
+            let order = cards.slice();
+            let timer = null, paused = false, animating = false;
+
+            function place() {
+                order.forEach((c, i) => {
+                    c.classList.remove('pos-0', 'pos-1', 'pos-2', 'leaving');
+                    c.classList.add('pos-' + i);
+                });
+            }
+            place();
+
+            function advance() {
+                if (order.length < 2 || animating) return;
+                const leaving = order[0];
+                order.push(order.shift());
+                if (reduce) { place(); return; }
+                animating = true;
+                order.forEach((c, i) => {
+                    if (c === leaving) return;
+                    c.classList.remove('pos-0', 'pos-1', 'pos-2');
+                    c.classList.add('pos-' + i);
+                });
+                leaving.classList.remove('pos-0', 'pos-1', 'pos-2');
+                leaving.classList.add('leaving');
+                const done = () => {
+                    leaving.removeEventListener('animationend', done);
+                    leaving.classList.remove('leaving');
+                    leaving.classList.add('pos-' + (order.length - 1));
+                    animating = false;
+                };
+                leaving.addEventListener('animationend', done);
+            }
+
+            function schedule() {
+                clearTimeout(timer);
+                if (reduce || paused) return;
+                timer = setTimeout(() => { advance(); schedule(); }, DELAY);
+            }
+            deck.addEventListener('mouseenter', () => { paused = true; clearTimeout(timer); });
+            deck.addEventListener('mouseleave', () => { paused = false; schedule(); });
+            deck.addEventListener('click', () => { advance(); schedule(); });
+            deck.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance(); schedule(); }
+            });
+            schedule();
+        })();
+    </script>
+</body>
+</html>
