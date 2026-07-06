@@ -713,12 +713,12 @@
             }
             .rail { padding-bottom: 4rem; }
             .bubble {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+                display: grid;
+                justify-items: center;
                 min-height: 0;
                 padding: 0;
-                margin-bottom: clamp(2.75rem, 7svh, 4.75rem);
+                gap: clamp(1.15rem, 3.6vw, 1.65rem);
+                margin-bottom: clamp(4.5rem, 11svh, 6.75rem);
                 text-align: center;
             }
             .bubble-title {
@@ -727,24 +727,26 @@
                 width: clamp(116px, 28vw, 150px);
                 height: clamp(116px, 28vw, 150px);
                 font-size: clamp(1.05rem, 3.5vw, 1.28rem);
+                z-index: 1;
                 translate: none !important;
             }
-            .bubble.is-active .bubble-title { transform: scale(1.04); }
+            .bubble.is-active .bubble-title { transform: scale(1.03); }
             /* items sit in-flow under the circle, always visible */
             .bubble-items,
             .build-items {
                 position: static;
                 width: 100%;
-                max-width: 38rem;
-                margin: clamp(1rem, 3vw, 1.35rem) auto 0;
+                max-width: min(38rem, 100%);
+                margin: 0 auto;
+                padding-top: clamp(0.2rem, 1vw, 0.6rem);
                 text-align: left;
                 transform: none;
                 opacity: 1;
                 pointer-events: auto;
             }
             .entry-title { font-size: clamp(1.2rem, 4.7vw, 1.55rem); }
-            .entry-desc { font-size: clamp(0.98rem, 3.6vw, 1.08rem); }
-            .entry-authors { font-size: clamp(0.94rem, 3.3vw, 1.02rem); }
+            .entry-desc { font-size: clamp(0.98rem, 3.4vw, 1.08rem); line-height: 1.55; }
+            .entry-authors { font-size: clamp(0.94rem, 3.1vw, 1.02rem); line-height: 1.45; }
             .skills-list { gap: 1.35rem; }
             .skills-list .entry { display: block; }
             .skills-list .entry-meta { margin-bottom: 0.35rem; }
@@ -803,11 +805,23 @@
                 width: min(340px, calc(100vw - 2.4rem), 62svh);
                 height: min(340px, calc(100vw - 2.4rem), 62svh);
             }
-            .bubble-title {
-                width: 112px;
-                height: 112px;
-                font-size: 1.02rem;
+            .bubble {
+                gap: 1rem;
+                margin-bottom: clamp(3.6rem, 10svh, 5.2rem);
             }
+            .bubble-title {
+                width: 108px;
+                height: 108px;
+                font-size: 1rem;
+            }
+            .bubble.is-active .bubble-title { transform: scale(1.02); }
+            .bubble-items,
+            .build-items {
+                padding-top: 0.35rem;
+            }
+            .entry-title { font-size: clamp(1.14rem, 4.9vw, 1.42rem); }
+            .entry-desc { font-size: 0.97rem; }
+            .entry-authors { font-size: 0.93rem; }
             .media-card { width: min(160px, calc(50vw - 1.4rem)); }
             .chip { padding: 0.5rem 0.85rem; font-size: 0.88rem; }
             .build-list { padding: 0.65rem; }
