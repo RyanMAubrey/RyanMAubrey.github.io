@@ -1186,7 +1186,11 @@
             for (const b of bubbles) {
                 const box = b.getBoundingClientRect();
                 const cy = box.top + box.height / 2;
-                b._title.style.translate = archOffset((cy - middle) / middle).toFixed(1) + 'px';
+                if (MOBILE_QUERY.matches) {
+                    b._title.style.translate = '0px';
+                } else {
+                    b._title.style.translate = archOffset((cy - middle) / middle).toFixed(1) + 'px';
+                }
                 const d = Math.abs(cy - middle);
                 if (b === activeBubble) activeDist = d;
                 if (d < smallest) { smallest = d; closest = b; }
