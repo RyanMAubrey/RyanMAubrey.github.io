@@ -730,7 +730,10 @@
                 z-index: 1;
                 translate: none !important;
             }
-            .bubble.is-active .bubble-title { transform: scale(1.03); }
+            .bubble.is-active .bubble-title {
+                transform: none;
+                box-shadow: 0 10px 30px rgba(22, 19, 15, 0.18);
+            }
             /* items sit in-flow under the circle, always visible */
             .bubble-items,
             .build-items {
@@ -814,7 +817,10 @@
                 height: 108px;
                 font-size: 1rem;
             }
-            .bubble.is-active .bubble-title { transform: scale(1.02); }
+            .bubble.is-active .bubble-title {
+                transform: none;
+                box-shadow: 0 10px 30px rgba(22, 19, 15, 0.18);
+            }
             .bubble-items,
             .build-items {
                 padding-top: 0.35rem;
