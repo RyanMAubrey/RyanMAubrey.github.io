@@ -728,6 +728,10 @@
                 height: clamp(116px, 28vw, 150px);
                 font-size: clamp(1.05rem, 3.5vw, 1.28rem);
                 z-index: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
                 translate: none !important;
             }
             .bubble.is-active .bubble-title {
@@ -822,6 +826,10 @@
                 width: 104px;
                 height: 104px;
                 font-size: 0.98rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
             }
             .bubble.is-active .bubble-title {
                 transform: none;
@@ -1202,7 +1210,7 @@
             const middle = window.innerHeight / 2;
             let closest = null, smallest = Infinity, activeDist = Infinity;
             for (const b of bubbles) {
-                const box = b.getBoundingClientRect();
+                const box = (MOBILE_QUERY.matches ? b._title : b).getBoundingClientRect();
                 const cy = box.top + box.height / 2;
                 if (MOBILE_QUERY.matches) {
                     b._title.style.translate = '0px';
